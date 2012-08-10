@@ -45,6 +45,7 @@ public class ConfiguracaoActivity extends DefaultActivity {
 			public void onClick(View v) {
 				if (validateFields()) {
 					save();
+					startMonitoring();
 					makeDefaultInfoMessage(ConfiguracaoActivity.this);
 				}
 
@@ -52,14 +53,12 @@ public class ConfiguracaoActivity extends DefaultActivity {
 		};
 
 		this.btSalvar.setOnClickListener(onclick);
-		
+
 		OnClickListener onClickSair = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
-				SharedPreferences.Editor editor = getSharedPreferences(Constantes.Preferencias.PREFERENCE_DEFAULT, 0).edit();
-
-				editor.remove(Constantes.Preferencias.USUARIO_LOGADO);
+				sair();
 
 				Intent intent = new Intent(ConfiguracaoActivity.this, ZapeatAuthActivity.class);
 
@@ -85,29 +84,29 @@ public class ConfiguracaoActivity extends DefaultActivity {
 
 		this.btBrowser.setOnClickListener(onClickBrowser);
 	}
-	
+
 	private void verificarExistenciaConfiguracao() {
-		
+
 		Configuracao configuracao = new Configuracao();
 
 		configuracao.setUsuario(super.getUsuarioLogado());
 
 		ConfiguracaoDAO configuracaoDAO = new ConfiguracaoDAO();
-		
+
 		configuracao = configuracaoDAO.obter(super.getUsuarioLogado(), this);
-		
-		if(configuracao!=null) {
-			
+
+		if (configuracao != null) {
+
 			this.distancia.setText(configuracao.getDistancia().toString());
-			
+
 			this.periodo.setText(configuracao.getPeriodo().toString());
-			
+
 		} else {
-			
+
 			makeInfoMessage(this, "Configure seu aplicativo para começar a usá-lo!");
-			
+
 		}
-		
+
 	}
 
 	private void save() {

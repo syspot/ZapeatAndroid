@@ -1,8 +1,6 @@
 package com.zapeat.activity;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,7 +10,7 @@ import android.widget.Button;
 
 import com.zapeat.util.Constantes;
 
-public class BrowserActivity extends Activity {
+public class BrowserActivity extends DefaultActivity {
 
 	private Button btSair;
 	private Button btConfiguracoes;
@@ -26,6 +24,9 @@ public class BrowserActivity extends Activity {
 		ecra.loadUrl(Constantes.Http.URL_ZAPEAT);
 		this.initComponents();
 		this.initListeners();
+		
+		setTelaAtual(this);
+		
 	}
 
 	private void initComponents() {
@@ -39,10 +40,8 @@ public class BrowserActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 
-				SharedPreferences.Editor editor = getSharedPreferences(Constantes.Preferencias.PREFERENCE_DEFAULT, 0).edit();
-
-				editor.remove(Constantes.Preferencias.USUARIO_LOGADO);
-
+				sair();
+				
 				Intent intent = new Intent(BrowserActivity.this, ZapeatAuthActivity.class);
 
 				startActivity(intent);
@@ -66,7 +65,7 @@ public class BrowserActivity extends Activity {
 		this.btSair.setOnClickListener(onClickSair);
 
 		this.btConfiguracoes.setOnClickListener(onClickConfiguracoes);
-		
+
 	}
 
 }

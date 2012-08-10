@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.zapeat.dao.ConfiguracaoDAO;
+import com.zapeat.model.Configuracao;
 import com.zapeat.util.Constantes;
 
 public class MainActivity extends DefaultActivity {
@@ -16,15 +18,25 @@ public class MainActivity extends DefaultActivity {
 
 		Integer usuario = shared.getInt(Constantes.Preferencias.USUARIO_LOGADO, 0);
 
-		Intent intentMain=null;
-		
-		if (usuario.intValue()==0) {
+		Intent intentMain = null;
+
+		if (usuario.intValue() == 0) {
 
 			intentMain = new Intent(this, ZapeatAuthActivity.class);
 
 		} else {
 
-			intentMain = new Intent(this, BrowserActivity.class);
+			Configuracao configuracao = new ConfiguracaoDAO().obter(getUsuarioLogado(), this);
+
+			if (configuracao == null) {
+
+				intentMain = new Intent(this, ConfiguracaoActivity.class);
+
+			} else {
+
+				intentMain = new Intent(this, BrowserActivity.class);
+
+			}
 
 		}
 
@@ -32,6 +44,5 @@ public class MainActivity extends DefaultActivity {
 
 		this.finish();
 	}
-
 
 }

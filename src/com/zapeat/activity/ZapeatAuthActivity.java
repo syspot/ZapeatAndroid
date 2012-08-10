@@ -98,7 +98,7 @@ public class ZapeatAuthActivity extends DefaultActivity implements OnClickListen
 			}
 
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			makeInfoMessage(this, "Ocorreu uma falha na autenticação, tente novamente mais tarde");
 		}
 
 	}
