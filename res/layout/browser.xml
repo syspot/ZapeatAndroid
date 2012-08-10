@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF8000" >
+
+    <WebView
+        android:id="@+id/wvBrowser"
+        android:layout_width="fill_parent"
+        android:layout_height="428dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/btSair" />
+
+    <Button
+        android:id="@+id/btSair"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/btConfig"
+        android:minHeight="40dip"
+        android:minWidth="168dip"
+        android:text="Sair" />
+
+    <Button
+        android:id="@+id/btConfig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:minHeight="40dip"
+        android:minWidth="169dip"
+        android:text="Configurações" />
+
+</RelativeLayout>

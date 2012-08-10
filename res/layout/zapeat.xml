@@ -1,57 +1,58 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:background="#FF9933">
     
+    <requestFocus />
     <EditText
         android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/senha"
+        android:layout_marginTop="77dp"
+        android:ems="10"
+        android:hint="@string/login" />
+    
+    <EditText
+        android:id="@+id/senha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="159dp"
         android:ems="10"
-        android:hint="Senha"
+        android:hint="@string/senha"
         android:inputType="textPassword" >
     </EditText>
-
-    <EditText
-        android:id="@+id/senha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/login"
-        android:layout_marginTop="77dp"
-        android:ems="10"
-        android:hint="Login" />
-		<requestFocus />
+		
     <TextView
         android:id="@+id/textLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/senha"
-        android:layout_alignLeft="@+id/senha"
+        android:layout_alignBottom="@+id/login"
+        android:layout_alignLeft="@+id/login"
         android:layout_marginBottom="46dp"
-        android:text="Login:" />
+        android:text="@string/login" />
 		
     <TextView
         android:id="@+id/textSenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/senha"
-        android:layout_below="@+id/senha"
+        android:layout_alignLeft="@+id/login"
+        android:layout_below="@+id/login"
         android:layout_marginTop="24dp"
-        android:text="Senha" />
+        android:text="@string/senha" />
 
     <Button
         android:id="@+id/btAutenticar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textSenha"
-        android:layout_alignRight="@+id/login"
-        android:layout_below="@+id/login"
+        android:layout_alignLeft="@+id/senha"
+        android:layout_alignRight="@+id/senha"
+        android:layout_below="@+id/senha"
         android:layout_marginTop="44dp"
-        android:text="Autenticar" />
-    
+        android:text="@string/autenticar" />
 
 </RelativeLayout>

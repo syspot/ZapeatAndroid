@@ -3,7 +3,6 @@ package com.zapeat.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
 
 import com.zapeat.util.Constantes;
 
@@ -17,15 +16,15 @@ public class MainActivity extends DefaultActivity {
 
 		Integer usuario = shared.getInt(Constantes.Preferencias.USUARIO_LOGADO, 0);
 
-		Intent intentMain = null;
-
-		if (usuario == null || usuario.intValue()==0) {
+		Intent intentMain=null;
+		
+		if (usuario.intValue()==0) {
 
 			intentMain = new Intent(this, ZapeatAuthActivity.class);
 
 		} else {
 
-			intentMain = new Intent(this, MonitoringActivity.class);
+			intentMain = new Intent(this, BrowserActivity.class);
 
 		}
 
@@ -34,9 +33,5 @@ public class MainActivity extends DefaultActivity {
 		this.finish();
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
-	}
+
 }

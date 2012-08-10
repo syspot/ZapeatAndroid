@@ -5,7 +5,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -47,12 +46,6 @@ public class MonitoringActivity extends DefaultActivity {
 		};
 
 		localizar.setOnClickListener(listener);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_monitoring, menu);
-		return true;
 	}
 
 	private void showCurrentLocation() {

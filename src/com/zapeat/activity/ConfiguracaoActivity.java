@@ -1,7 +1,8 @@
 package com.zapeat.activity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -10,12 +11,15 @@ import android.widget.Toast;
 
 import com.zapeat.dao.ConfiguracaoDAO;
 import com.zapeat.model.Configuracao;
+import com.zapeat.util.Constantes;
 
 public class ConfiguracaoActivity extends DefaultActivity {
 
 	private Button btSalvar;
 	private EditText distancia;
 	private EditText periodo;
+	private Button btSair;
+	private Button btBrowser;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,8 @@ public class ConfiguracaoActivity extends DefaultActivity {
 		this.btSalvar = (Button) findViewById(R.id.btSalvar);
 		this.distancia = (EditText) findViewById(R.id.distanciaText);
 		this.periodo = (EditText) findViewById(R.id.periodoText);
+		this.btSair = (Button) findViewById(R.id.btSair);
+		this.btBrowser = (Button) findViewById(R.id.btBrowser);
 	}
 
 	private void initListeners() {
@@ -46,6 +52,38 @@ public class ConfiguracaoActivity extends DefaultActivity {
 		};
 
 		this.btSalvar.setOnClickListener(onclick);
+		
+		OnClickListener onClickSair = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				SharedPreferences.Editor editor = getSharedPreferences(Constantes.Preferencias.PREFERENCE_DEFAULT, 0).edit();
+
+				editor.remove(Constantes.Preferencias.USUARIO_LOGADO);
+
+				Intent intent = new Intent(ConfiguracaoActivity.this, ZapeatAuthActivity.class);
+
+				startActivity(intent);
+
+				finish();
+			}
+		};
+
+		OnClickListener onClickBrowser = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ConfiguracaoActivity.this, BrowserActivity.class);
+
+				startActivity(intent);
+
+				finish();
+
+			}
+		};
+
+		this.btSair.setOnClickListener(onClickSair);
+
+		this.btBrowser.setOnClickListener(onClickBrowser);
 	}
 	
 	private void verificarExistenciaConfiguracao() {
@@ -107,9 +145,4 @@ public class ConfiguracaoActivity extends DefaultActivity {
 		return true;
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.configuracao, menu);
-		return true;
-	}
 }

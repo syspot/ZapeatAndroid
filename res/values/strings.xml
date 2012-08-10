@@ -6,5 +6,10 @@
     <string name="title_activity_monitoring">Zapeat</string>
     <string name="title_activity_main">Zapeat</string>
     <string name="title_activity_configuracao">Zapeat</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_browser">Zapeat</string>
+    <string name="login">Login</string>
+    <string name="senha">Senha</string>
+    <string name="autenticar">Autenticar</string>
 
 </resources>
