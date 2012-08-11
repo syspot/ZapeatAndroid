@@ -17,22 +17,19 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import android.os.AsyncTask;
+import android.annotation.SuppressLint;
 
 import com.zapeat.exception.ApplicationException;
+import com.zapeat.model.Promocao;
 import com.zapeat.model.Usuario;
 import com.zapeat.util.Constantes;
 
-public class AuthProvider extends AsyncTask<Usuario, Void, Usuario> {
+public class AuthProvider {
 
-	@Override
-	protected Usuario doInBackground(Usuario... params) {
+	@SuppressLint({ "NewApi" })
+	public Usuario autenticar(Usuario usuario) throws ApplicationException {
 
-		if (params == null || params.length == 0) {
-			return null;
-		}
-
-		Usuario usuario = params[0];
+		Usuario user = null;
 
 		try {
 
@@ -48,16 +45,19 @@ public class AuthProvider extends AsyncTask<Usuario, Void, Usuario> {
 				usuario = null;
 			}
 
-			usuario = readJson(response);
-
-			return usuario;
+			user = readJson(response);
 
 		} catch (Exception ex) {
-			return null;
+			throw new ApplicationException(ex);
 		}
+
+		return user;
+
 	}
 
 	private Usuario readJson(HttpResponse response) throws ApplicationException {
+
+		Usuario usuario = null;
 
 		try {
 
@@ -71,19 +71,55 @@ public class AuthProvider extends AsyncTask<Usuario, Void, Usuario> {
 				builder.append(line);
 			}
 
-			JSONArray jsonArray = new JSONArray(builder.toString());
+			String json = builder.toString();
 
-			JSONObject jsonObject;
+			if ("".equals(json)) {
+				return null;
+			}
 
-			if (jsonArray != null && jsonArray.length() >= 0) {
+			JSONObject jsonObject = new JSONObject(builder.toString());
 
-				jsonObject = jsonArray.getJSONObject(0);
+			if (jsonObject.getBoolean("logged")) {
+
+				usuario = new Usuario();
+
+				usuario.setId(jsonObject.getInt("id"));
+
+				usuario.setNome(jsonObject.getString("nome"));
+
+				usuario.setPromocoes(new ArrayList<Promocao>());
+
+				JSONArray array = jsonObject.getJSONArray("promocoes");
+
+				JSONObject jsonPromo = null;
+
+				Promocao promocao = null;
+
+				for (int i = 0; i < array.length(); i++) {
+
+					jsonPromo = array.getJSONObject(i);
+
+					promocao = new Promocao();
+
+					promocao.setId(jsonPromo.getLong(Constantes.JsonProperties.ID));
+
+					promocao.setLocalidade(jsonPromo.getString(Constantes.JsonProperties.LOCALIDADE));
+
+					promocao.setLatitude(jsonPromo.getDouble(Constantes.JsonProperties.LATITUDE));
+
+					promocao.setLongitude(jsonPromo.getDouble(Constantes.JsonProperties.LONGITUDE));
+
+					promocao.setDescricao(jsonPromo.getString(Constantes.JsonProperties.DESCRICAO));
+
+					usuario.getPromocoes().add(promocao);
+
+				}
 
 			}
 
 		} catch (Exception ex) {
 			throw new ApplicationException(ex);
 		}
-		return null;
+		return usuario;
 	}
 }

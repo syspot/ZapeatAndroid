@@ -1,7 +1,6 @@
 package com.zapeat.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,7 +10,6 @@ import android.widget.Toast;
 
 import com.zapeat.dao.ConfiguracaoDAO;
 import com.zapeat.model.Configuracao;
-import com.zapeat.util.Constantes;
 
 public class ConfiguracaoActivity extends DefaultActivity {
 
@@ -45,7 +43,6 @@ public class ConfiguracaoActivity extends DefaultActivity {
 			public void onClick(View v) {
 				if (validateFields()) {
 					save();
-					startMonitoring();
 					makeDefaultInfoMessage(ConfiguracaoActivity.this);
 				}
 
@@ -126,6 +123,8 @@ public class ConfiguracaoActivity extends DefaultActivity {
 		} else {
 			configuracaoDAO.alterar(configuracao, this);
 		}
+
+		startMonitoring();
 
 	}
 

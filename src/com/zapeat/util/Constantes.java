@@ -13,6 +13,25 @@ public class Constantes {
 		String USUARIO_LOGADO = "usuarioLogado";
 		
 	}
+	
+	public interface GPS {
+		int DISTANCIA = 1000; //metros
+		float DISTANCIA_ALERT_PROMOCAO = 1000;
+	}
+	
+	public interface Services {
+		String MONITORING = "monitoring";
+	}
+	
+	public interface JsonProperties {
+		
+		String ID = "id";
+		String DESCRICAO = "descricao";
+		String LATITUDE = "latitude";
+		String LONGITUDE = "longitude";
+		String LOCALIDADE = "localidade";
+		
+	}
 
 	public interface Http {
 
