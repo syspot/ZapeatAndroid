@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/moreButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="2px"
+        android:drawableLeft="@drawable/refresh"
+        android:text="(Atualizado em 12/08/2012)" />
+    
+<ListView
+        android:id="@+id/list__promocoes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#ECECEC"
+        android:dividerHeight="3sp"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true" 
+        android:layout_weight="1"/>
+
+</LinearLayout>

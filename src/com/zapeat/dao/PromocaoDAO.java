@@ -40,6 +40,31 @@ public class PromocaoDAO {
 		return promocoes;
 
 	}
+	
+	public List<Promocao> pesquisarTodas(Context context) {
+
+		List<Promocao> promocoes = new ArrayList<Promocao>();
+
+		DBUtil conexao = DBUtil.getInstance(context);
+		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+		qb.setTables(DBUtil.Tabelas.PROMOCOES);
+		
+		String[] colunas = new String[] { "id", "descricao", "latitude", "longitude", "localidade" };
+		Cursor cursor = qb.query(conexao.getReadableDatabase(), colunas, null, null, null, null, null);
+
+		cursor.moveToFirst();
+
+		while (!cursor.isAfterLast()) {
+			promocoes.add(this.createPromocao(cursor));
+			cursor.moveToNext();
+		}
+
+		DBUtil.close(conexao, cursor);
+
+		return promocoes;
+
+	}
 
 	public void marcarEnviada(Promocao promocao, Context context) {
 
@@ -68,7 +93,7 @@ public class PromocaoDAO {
 
 	}
 
-	public void inserirPromocoes(List<Promocao> promocoes, Context context) {
+	public void inserir(List<Promocao> promocoes, Context context) {
 
 		DBUtil conexao = DBUtil.getInstance(context);
 		ContentValues initialValues = null;

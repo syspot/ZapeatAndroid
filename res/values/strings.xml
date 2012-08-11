@@ -11,5 +11,7 @@
     <string name="login">Login</string>
     <string name="senha">Senha</string>
     <string name="autenticar">Autenticar</string>
+    <string name="title_activity_list">Zapeat - Promoções</string>
+    <string name="title_activity_promocao_list">Zapeat</string>
 
 </resources>

@@ -1,5 +1,9 @@
 package com.zapeat.activity;
 
+import java.util.Iterator;
+import java.util.List;
+
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,9 +17,11 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.StrictMode;
 import android.widget.Toast;
 
 import com.zapeat.dao.PromocaoDAO;
+import com.zapeat.http.HttpUtil;
 import com.zapeat.model.Promocao;
 import com.zapeat.model.Usuario;
 import com.zapeat.util.Constantes;
@@ -64,15 +70,57 @@ public class PollService extends Service {
 	}
 
 	private class LocationTask extends AsyncTask<String, Void, Boolean> {
+		
 		private Service service;
 
 		public LocationTask(Service service) {
 			this.service = service;
 		}
 
+		@SuppressLint("NewApi")
 		@Override
 		protected Boolean doInBackground(final String... args) {
-			return null;
+
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitNetwork().build();
+			StrictMode.setThreadPolicy(policy);
+			
+			List<Promocao> promocoesNovas = null;
+			List<Promocao> promocoesAtuais = null;
+			Promocao nova = null;
+			
+			while (true) {
+
+				if (getUsuarioLogado() != null) {
+
+					try {
+
+						promocoesNovas = HttpUtil.pesquisarPromocoes(getUsuarioLogado());
+
+						promocoesAtuais = promocaoDAO.pesquisarTodas(getApplicationContext());
+
+						Iterator<Promocao> iterador = promocoesNovas.iterator();
+
+						while (iterador.hasNext()) {
+
+							nova = iterador.next();
+
+							if (promocoesAtuais.contains(nova)) {
+								iterador.remove();
+							}
+						}
+
+						promocaoDAO.inserir(promocoesNovas, getApplicationContext());
+
+						//Thread.sleep(Constantes.Services.TRES_HORAS);
+						
+						Thread.sleep(1000 * 60);
+
+					} catch (Exception ex) {
+
+					}
+				}
+
+			}
 		}
 	}
 
@@ -129,20 +177,23 @@ public class PollService extends Service {
 	}
 
 	private void notificate(Promocao promocao) {
-		
+
 		try {
+
 			NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 			Notification notification = new Notification(R.drawable.ic_launcher, makePromocaoMessage(promocao), System.currentTimeMillis());
 			notification.defaults |= Notification.DEFAULT_ALL;
 			notification.flags |= Notification.FLAG_AUTO_CANCEL;
-			Intent intent = new Intent(getApplicationContext(), BrowserActivity.class);
+			Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
 			PendingIntent activity = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
 			notification.setLatestEventInfo(getApplicationContext(), "Zapeat", makePromocaoMessage(promocao), activity);
 			notificationManager.notify(0, notification);
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
+
 	}
 
 }

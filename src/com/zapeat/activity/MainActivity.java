@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.zapeat.dao.ConfiguracaoDAO;
-import com.zapeat.model.Configuracao;
 import com.zapeat.util.Constantes;
 
 public class MainActivity extends DefaultActivity {
@@ -26,17 +24,7 @@ public class MainActivity extends DefaultActivity {
 
 		} else {
 
-			Configuracao configuracao = new ConfiguracaoDAO().obter(getUsuarioLogado(), this);
-
-			if (configuracao == null) {
-
-				intentMain = new Intent(this, ConfiguracaoActivity.class);
-
-			} else {
-
-				intentMain = new Intent(this, BrowserActivity.class);
-
-			}
+			intentMain = new Intent(this, PromocaoListActivity.class);
 
 		}
 

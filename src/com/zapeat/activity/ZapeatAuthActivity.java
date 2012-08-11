@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.zapeat.dao.PromocaoDAO;
-import com.zapeat.http.AuthProvider;
+import com.zapeat.http.HttpUtil;
 import com.zapeat.model.Usuario;
 import com.zapeat.util.Constantes;
 
@@ -56,7 +56,7 @@ public class ZapeatAuthActivity extends DefaultActivity implements OnClickListen
 			usuario.setLogin(this.login.getText().toString());
 			usuario.setSenha(this.senha.getText().toString());
 
-			usuario = new AuthProvider().autenticar(usuario);
+			usuario = HttpUtil.autenticar(usuario);
 
 			if (usuario == null) {
 
@@ -86,7 +86,7 @@ public class ZapeatAuthActivity extends DefaultActivity implements OnClickListen
 
 		promocaoDAO.clean(getApplicationContext());
 
-		promocaoDAO.inserirPromocoes(usuario.getPromocoes(), getApplicationContext());
+		promocaoDAO.inserir(usuario.getPromocoes(), getApplicationContext());
 
 		this.startActivity(new Intent(this, BrowserActivity.class));
 
