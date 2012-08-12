@@ -1,5 +1,7 @@
 package com.zapeat.activity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -87,6 +89,7 @@ public class PollService extends Service {
 			List<Promocao> promocoesNovas = null;
 			List<Promocao> promocoesAtuais = null;
 			Promocao nova = null;
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
 			while (true) {
 
@@ -110,6 +113,14 @@ public class PollService extends Service {
 						}
 
 						promocaoDAO.inserir(promocoesNovas, getApplicationContext());
+
+						SharedPreferences.Editor editor = getSharedPreferences(Constantes.Preferencias.PREFERENCE_DEFAULT, 0).edit();
+
+						editor.remove(Constantes.Preferencias.ULTIMA_ATUALIZACAO);
+
+						editor.putString(Constantes.Preferencias.ULTIMA_ATUALIZACAO, dateFormat.format(new Date()));
+						
+						editor.commit();
 
 						Thread.sleep(Constantes.Services.TRES_HORAS);
 

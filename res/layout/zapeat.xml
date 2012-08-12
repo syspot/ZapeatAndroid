@@ -34,6 +34,7 @@
         android:layout_alignRight="@+id/senha"
         android:layout_below="@+id/senha"
         android:layout_marginTop="44dp"
-        android:text="@string/autenticar" />
+        android:text="@string/autenticar" 
+        android:background="@drawable/shapebutton"/>
 
 </RelativeLayout>

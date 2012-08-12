@@ -1,10 +1,13 @@
 package com.zapeat.activity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -18,6 +21,7 @@ import com.zapeat.adapter.ListPromocaoAdapter;
 import com.zapeat.dao.PromocaoDAO;
 import com.zapeat.http.HttpUtil;
 import com.zapeat.model.Promocao;
+import com.zapeat.util.Constantes;
 
 public class PromocaoListActivity extends DefaultActivity implements OnClickListener {
 
@@ -29,16 +33,23 @@ public class PromocaoListActivity extends DefaultActivity implements OnClickList
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_promocao_list);
+
 		this.listViewPromocoes = (ListView) findViewById(R.id.list__promocoes);
 		this.listViewPromocoes.setCacheColorHint(Color.TRANSPARENT);
 		this.btAtualizar = (Button) findViewById(R.id.btAtualizarPromocao);
 		this.btAtualizar.setOnClickListener(this);
 		this.btSair = (Button) findViewById(R.id.btSairList);
 		this.btWeb = (Button) findViewById(R.id.btWeb);
+
 		this.initPromocoes();
 		this.initListeners();
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		this.ultimaAtualizacao = getSharedPreferences(Constantes.Preferencias.PREFERENCE_DEFAULT, 0).getString(Constantes.Preferencias.ULTIMA_ATUALIZACAO, dateFormat.format(new Date()));
+		this.btAtualizar.setText("Atualizado às \n" + this.ultimaAtualizacao);
 	}
 
 	private void initPromocoes() {
@@ -129,6 +140,10 @@ public class PromocaoListActivity extends DefaultActivity implements OnClickList
 				dao.inserir(promocoesNovas, getApplicationContext());
 
 				this.initPromocoes();
+
+				super.alterarUltimaAtualizacaoPromocoes();
+				
+				this.btAtualizar.setText("Atualizado às \n" + this.ultimaAtualizacao);
 
 			} catch (Exception ex) {
 				super.makeInfoMessage(this, "Ocorreu um erro ao atualizar as promoções, tente novamente mais tarde");

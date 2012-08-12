@@ -66,6 +66,8 @@ public class ZapeatAuthActivity extends DefaultActivity implements OnClickListen
 
 				this.redirecionar(usuario);
 
+				startMonitoring();
+
 			}
 
 		} catch (Exception ex) {

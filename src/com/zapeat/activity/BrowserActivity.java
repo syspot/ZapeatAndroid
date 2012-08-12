@@ -27,12 +27,6 @@ public class BrowserActivity extends DefaultActivity {
 
 	}
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		startMonitoring();
-	}
-
 	private void initComponents() {
 		this.btSair = (Button) findViewById(R.id.btSair);
 		this.btPromocoes = (Button) findViewById(R.id.btPromo);

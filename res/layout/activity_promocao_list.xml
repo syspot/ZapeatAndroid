@@ -1,53 +1,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-      <LinearLayout
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:background="#C0C0C0"
-          android:orientation="horizontal" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#C0C0C0"
+        android:orientation="horizontal" >
 
-                <Button android:id="@+id/btAtualizarPromocao"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="15dp"
-                    android:background="#C0C0C0"
-                    android:drawableLeft="@drawable/refresh"
-                    android:text="@string/atualizar" />
+        <Button
+            android:id="@+id/btAtualizarPromocao"
+            android:layout_width="156dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shapebutton"
+            android:drawableLeft="@drawable/refresh"
+            android:paddingLeft="15dp"
+            android:text="@string/atualizar"
+            android:textSize="11dp" />
 
-                <Button
-                    android:id="@+id/btWeb"
-                    android:background="#C0C0C0"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="15dp"
-                    android:drawableLeft="@drawable/www"
-                    android:text="@string/web"/>
-                
-                <Button
-                    android:id="@+id/btSairList"
-                    android:background="#C0C0C0"
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawableLeft="@drawable/logout"
-                    android:paddingLeft="15dp"
-                    android:text="@string/sair" />
-            </LinearLayout>
-    
-<ListView
+        <Button
+            android:id="@+id/btWeb"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shapebutton"
+            android:drawableLeft="@drawable/www"
+            android:paddingLeft="15dp"
+            android:text="@string/web"
+            android:textSize="11dp" />
+
+        <Button
+            android:id="@+id/btSairList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shapebutton"
+            android:drawableLeft="@drawable/logout"
+            android:paddingLeft="15dp"
+            android:text="@string/sair"
+            android:textSize="11dp" />
+
+    </LinearLayout>
+
+    <ListView
         android:id="@+id/list__promocoes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:divider="#ECECEC"
         android:dividerHeight="3sp"
         android:footerDividersEnabled="true"
-        android:headerDividersEnabled="true" 
-        android:layout_weight="1"/>
+        android:headerDividersEnabled="true" />
 
 </LinearLayout>

@@ -1,5 +1,8 @@
 package com.zapeat.activity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +15,8 @@ import com.zapeat.model.Usuario;
 import com.zapeat.util.Constantes;
 
 public class DefaultActivity extends Activity {
+
+	protected String ultimaAtualizacao;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -49,9 +54,10 @@ public class DefaultActivity extends Activity {
 
 	protected void startMonitoring() {
 		stopMonitoring();
-		startService(new Intent(this,PollService.class));
+		startService(new Intent(this, PollService.class));
+
 	}
-	
+
 	protected void stopMonitoring() {
 		stopService(new Intent(Constantes.Services.MONITORING));
 	}
@@ -63,9 +69,22 @@ public class DefaultActivity extends Activity {
 		editor.remove(Constantes.Preferencias.USUARIO_LOGADO);
 
 		editor.commit();
-		
+
 		stopMonitoring();
 
+	}
+
+	protected void alterarUltimaAtualizacaoPromocoes() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		SharedPreferences.Editor editor = getSharedPreferences(Constantes.Preferencias.PREFERENCE_DEFAULT, 0).edit();
+
+		editor.remove(Constantes.Preferencias.ULTIMA_ATUALIZACAO);
+
+		editor.putString(Constantes.Preferencias.ULTIMA_ATUALIZACAO, dateFormat.format(new Date()));
+
+		this.ultimaAtualizacao = dateFormat.format(new Date());
+
+		editor.commit();
 	}
 
 }

@@ -15,6 +15,6 @@
     <string name="title_activity_promocao_list">Zapeat</string>
     <string name="web">Web</string>
     <string name="sair">Sair</string>
-    <string name="atualizar">Atualizar</string>
+    <string name="atualizar">Atualizado às \n 12:12:12 12:12</string>
     
 </resources>

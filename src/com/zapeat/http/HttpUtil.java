@@ -15,6 +15,9 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,12 +35,17 @@ public class HttpUtil {
 
 		try {
 
-			HttpClient httpclient = new DefaultHttpClient();
+			HttpParams httpParameters = new BasicHttpParams();
+
+			int timeoutConnection = 10000;
+			HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+
+			HttpClient httpclient = new DefaultHttpClient(httpParameters);
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-			
+
 			nameValuePairs.add(new BasicNameValuePair(Constantes.Http.PARAMETRO_LOGIN, usuario.getLogin()));
 			nameValuePairs.add(new BasicNameValuePair(Constantes.Http.PARAMETRO_SENHA, usuario.getSenha()));
-			
+
 			HttpPost httppost = new HttpPost(Constantes.Http.URL_AUTH);
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			HttpResponse response = httpclient.execute(httppost);
@@ -60,7 +68,12 @@ public class HttpUtil {
 
 		try {
 
-			HttpClient httpclient = new DefaultHttpClient();
+			HttpParams httpParameters = new BasicHttpParams();
+
+			int timeoutConnection = 5000;
+			HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+
+			HttpClient httpclient = new DefaultHttpClient(httpParameters);
 
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
 
