@@ -13,7 +13,7 @@ import com.zapeat.util.Constantes;
 public class BrowserActivity extends DefaultActivity {
 
 	private Button btSair;
-	private Button btConfiguracoes;
+	private Button btPromocoes;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class BrowserActivity extends DefaultActivity {
 		ecra.loadUrl(Constantes.Http.URL_ZAPEAT);
 		this.initComponents();
 		this.initListeners();
-		
+
 	}
 
 	@Override
@@ -32,10 +32,10 @@ public class BrowserActivity extends DefaultActivity {
 		super.onStart();
 		startMonitoring();
 	}
-	
+
 	private void initComponents() {
 		this.btSair = (Button) findViewById(R.id.btSair);
-		this.btConfiguracoes = (Button) findViewById(R.id.btConfig);
+		this.btPromocoes = (Button) findViewById(R.id.btPromo);
 	}
 
 	private void initListeners() {
@@ -45,7 +45,7 @@ public class BrowserActivity extends DefaultActivity {
 			public void onClick(View v) {
 
 				sair();
-				
+
 				Intent intent = new Intent(BrowserActivity.this, ZapeatAuthActivity.class);
 
 				startActivity(intent);
@@ -54,10 +54,10 @@ public class BrowserActivity extends DefaultActivity {
 			}
 		};
 
-		OnClickListener onClickConfiguracoes = new OnClickListener() {
+		OnClickListener onClickPromo = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(BrowserActivity.this, ConfiguracaoActivity.class);
+				Intent intent = new Intent(BrowserActivity.this, PromocaoListActivity.class);
 
 				startActivity(intent);
 
@@ -68,7 +68,7 @@ public class BrowserActivity extends DefaultActivity {
 
 		this.btSair.setOnClickListener(onClickSair);
 
-		this.btConfiguracoes.setOnClickListener(onClickConfiguracoes);
+		this.btPromocoes.setOnClickListener(onClickPromo);
 
 	}
 

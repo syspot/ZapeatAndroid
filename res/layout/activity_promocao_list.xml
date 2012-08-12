@@ -3,13 +3,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
     android:orientation="vertical">
-    <Button
-        android:id="@+id/moreButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:drawablePadding="2px"
-        android:drawableLeft="@drawable/refresh"
-        android:text="(Atualizado em 12/08/2012)" />
+
+      <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:background="#C0C0C0"
+          android:orientation="horizontal" >
+
+                <Button android:id="@+id/btAtualizarPromocao"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="15dp"
+                    android:background="#C0C0C0"
+                    android:drawableLeft="@drawable/refresh"
+                    android:text="@string/atualizar" />
+
+                <Button
+                    android:id="@+id/btWeb"
+                    android:background="#C0C0C0"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="15dp"
+                    android:drawableLeft="@drawable/www"
+                    android:text="@string/web"/>
+                
+                <Button
+                    android:id="@+id/btSairList"
+                    android:background="#C0C0C0"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/logout"
+                    android:paddingLeft="15dp"
+                    android:text="@string/sair" />
+            </LinearLayout>
     
 <ListView
         android:id="@+id/list__promocoes"

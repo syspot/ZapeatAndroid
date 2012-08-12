@@ -70,7 +70,7 @@ public class PollService extends Service {
 	}
 
 	private class LocationTask extends AsyncTask<String, Void, Boolean> {
-		
+
 		private Service service;
 
 		public LocationTask(Service service) {
@@ -83,11 +83,11 @@ public class PollService extends Service {
 
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitNetwork().build();
 			StrictMode.setThreadPolicy(policy);
-			
+
 			List<Promocao> promocoesNovas = null;
 			List<Promocao> promocoesAtuais = null;
 			Promocao nova = null;
-			
+
 			while (true) {
 
 				if (getUsuarioLogado() != null) {
@@ -111,9 +111,7 @@ public class PollService extends Service {
 
 						promocaoDAO.inserir(promocoesNovas, getApplicationContext());
 
-						//Thread.sleep(Constantes.Services.TRES_HORAS);
-						
-						Thread.sleep(1000 * 60);
+						Thread.sleep(Constantes.Services.TRES_HORAS);
 
 					} catch (Exception ex) {
 

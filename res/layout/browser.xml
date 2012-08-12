@@ -1,35 +1,45 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/RelativeLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FF8000" >
+    android:layout_height="match_parent" 
+    android:orientation="vertical">
+
+      <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:background="#C0C0C0"
+          android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/btPromo"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#C0C0C0"
+                    android:drawableLeft="@drawable/cart"
+                    android:paddingLeft="20dp"
+                    android:text="Promoções" />
+                
+                <Button
+                    android:id="@+id/btSair"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#C0C0C0"
+                    android:paddingLeft="20dp"
+                    android:drawableLeft="@drawable/logout"
+                    android:text="Sair" />
+
+            </LinearLayout>
+    
 
     <WebView
         android:id="@+id/wvBrowser"
-        android:layout_width="fill_parent"
-        android:layout_height="428dp"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/btSair" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight="3sp"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true" 
+        android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/btSair"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/btConfig"
-        android:minHeight="40dip"
-        android:minWidth="168dip"
-        android:text="Sair" />
-
-    <Button
-        android:id="@+id/btConfig"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:minHeight="40dip"
-        android:minWidth="169dip"
-        android:text="Configurações" />
-
-</RelativeLayout>
+</LinearLayout>

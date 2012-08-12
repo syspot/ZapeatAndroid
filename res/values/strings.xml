@@ -10,8 +10,11 @@
     <string name="title_activity_browser">Zapeat</string>
     <string name="login">Login</string>
     <string name="senha">Senha</string>
-    <string name="autenticar">Autenticar</string>
+    <string name="autenticar">Entrar</string>
     <string name="title_activity_list">Zapeat - Promoções</string>
     <string name="title_activity_promocao_list">Zapeat</string>
-
+    <string name="web">Web</string>
+    <string name="sair">Sair</string>
+    <string name="atualizar">Atualizar</string>
+    
 </resources>

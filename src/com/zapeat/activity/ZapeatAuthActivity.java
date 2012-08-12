@@ -88,7 +88,7 @@ public class ZapeatAuthActivity extends DefaultActivity implements OnClickListen
 
 		promocaoDAO.inserir(usuario.getPromocoes(), getApplicationContext());
 
-		this.startActivity(new Intent(this, BrowserActivity.class));
+		this.startActivity(new Intent(this, PromocaoListActivity.class));
 
 		this.finish();
 	}
