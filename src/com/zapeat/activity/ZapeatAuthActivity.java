@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -44,13 +43,10 @@ public class ZapeatAuthActivity extends DefaultActivity implements OnClickListen
 
 	}
 
-	@SuppressLint({ "NewApi" })
+
 	private void autenticar() {
 
 		try {
-
-			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitNetwork().build();
-			StrictMode.setThreadPolicy(policy);
 
 			Usuario usuario = new Usuario();
 			usuario.setLogin(this.login.getText().toString());
